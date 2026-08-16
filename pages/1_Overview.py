@@ -19,11 +19,7 @@ from data.database import (
     get_site_list
 )
 
-
-# ============================================================
 # PAGE CONFIG
-# ============================================================
-
 st.set_page_config(
     page_title="Overview - Network Operations",
     page_icon="📊",
