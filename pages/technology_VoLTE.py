@@ -13,5 +13,4 @@ st.set_page_config(
 
 
 navigation("VoLTE")
-
 render_technology_dashboard("VoLTE")

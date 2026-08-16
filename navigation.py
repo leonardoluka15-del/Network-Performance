@@ -1557,7 +1557,7 @@ def navigation(
             elif technology_choice == "VoLTE":
 
                 st.switch_page(
-                    "pages/technology_Volte.py"
+                    "pages/technology_VoLTE.py"
                 )
 
 

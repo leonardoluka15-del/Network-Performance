@@ -27,54 +27,36 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-
-# ============================================================
 # NAVIGATION
-# ============================================================
-
 navigation("Overview")
 
-
-# ============================================================
 # THEME
-# ============================================================
-
 dashboard_theme = st.session_state.get(
     "dashboard_theme",
     "Light"
 )
 
-
 if dashboard_theme == "Dark":
-
     PAGE_BG = "#111827"
     PANEL_BG = "#1f2937"
     CARD_BG = "#1f2937"
-
     TEXT_PRIMARY = "#f9fafb"
     TEXT_SECONDARY = "#cbd5e1"
     TEXT_MUTED = "#94a3b8"
-
     BORDER = "#64748b"
-
     CHART_BG = "#1f2937"
     GRID = "#374151"
 
 else:
-
     PAGE_BG = "#ffffff"
     PANEL_BG = "#ffffff"
     CARD_BG = "#ffffff"
-
     TEXT_PRIMARY = "#111111"
     TEXT_SECONDARY = "#666666"
     TEXT_MUTED = "#8a8a8a"
-
     BORDER = "#8f969f"
-
     CHART_BG = "#ffffff"
     GRID = "#eeeeee"
-
 
 CORAL = "#ff6258"
 GREEN = "#16a34a"
@@ -82,19 +64,12 @@ AMBER = "#d97706"
 RED = "#dc2626"
 BLUE = "#2563eb"
 
-
-# ============================================================
 # PAGE CSS
-# ============================================================
-
 st.markdown(
     f"""
 <style>
 
-/* =========================================================
-   MAIN
-   ========================================================= */
-
+/* MAIN */
 .st-key-network_header {{
     margin-bottom: 0 !important;
 }}
@@ -103,16 +78,11 @@ div[data-testid="stMainBlockContainer"] {{
     padding-top: 0 !important;
 }}
 
-
-/* =========================================================
-   PAGE HEADER
-   ========================================================= */
-
+/* PAGE HEADER */
 .overview-wrapper {{
     padding: 20px 26px 5px 26px;
     font-family: Arial, Helvetica, sans-serif;
 }}
-
 
 .overview-title {{
     font-size: 28px;
@@ -120,7 +90,6 @@ div[data-testid="stMainBlockContainer"] {{
     color: {TEXT_PRIMARY} !important;
     margin: 0;
 }}
-
 
 .overview-subtitle {{
     font-size: 14px;
@@ -130,77 +99,43 @@ div[data-testid="stMainBlockContainer"] {{
 }}
 
 
-/* =========================================================
-   KPI CARDS
-   ========================================================= */
-
+/* KPI CARDS */
 div[class*="st-key-overview_kpi_"] {{
-
     border: 2px solid {BORDER} !important;
-
     border-radius: 8px !important;
-
     background-color: {CARD_BG} !important;
-
     box-sizing: border-box !important;
-
     box-shadow: none !important;
-
 }}
-
 
 div[class*="st-key-overview_kpi_"]
 div[data-testid="stVerticalBlockBorderWrapper"] {{
-
     border: none !important;
-
     box-shadow: none !important;
-
     background: transparent !important;
-
 }}
-
 
 .overview-kpi-label {{
-
     font-size: 11px;
-
     color: {TEXT_SECONDARY} !important;
-
     font-weight: 700;
-
     text-transform: uppercase;
-
     letter-spacing: 0.2px;
-
     margin-bottom: 8px;
-
 }}
-
 
 .overview-kpi-value {{
-
     font-size: 27px;
-
     font-weight: 700;
-
     line-height: 1.1;
-
     color: {TEXT_PRIMARY} !important;
-
     margin-bottom: 7px;
-
 }}
 
-
 .overview-kpi-note {{
-
     font-size: 10px;
-
     font-weight: 600;
-
     color: {TEXT_MUTED} !important;
-
 }}
 
 
@@ -335,12 +270,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] {{
 # ============================================================
 # HELPERS
 # ============================================================
-
-def panel_title(
-    title,
-    subtitle=""
-):
-
+def panel_title(title, subtitle=""):
     st.markdown(
         (
             '<div class="panel-header">'
@@ -352,18 +282,8 @@ def panel_title(
     )
 
 
-def kpi_card(
-    label,
-    value,
-    note,
-    key
-):
-
-    with st.container(
-        border=True,
-        key=key
-    ):
-
+def kpi_card(label, value, note, key):
+    with st.container(border=True, key=key):
         st.markdown(
             (
                 '<div class="overview-kpi-label">'
@@ -372,7 +292,6 @@ def kpi_card(
             ),
             unsafe_allow_html=True
         )
-
 
         st.markdown(
             (
@@ -383,7 +302,6 @@ def kpi_card(
             unsafe_allow_html=True
         )
 
-
         st.markdown(
             (
                 '<div class="overview-kpi-note">'
@@ -393,268 +311,80 @@ def kpi_card(
             unsafe_allow_html=True
         )
 
-
-def safe_mean(
-    dataframe,
-    column
-):
-
-    if (
-        dataframe.empty
-        or
-        column not in dataframe.columns
-    ):
-
+def safe_mean(dataframe, column):
+    if (dataframe.empty or column not in dataframe.columns):
         return np.nan
-
-
-    values = pd.to_numeric(
-        dataframe[column],
-        errors="coerce"
-    )
-
-
+    values = pd.to_numeric(dataframe[column], errors="coerce")
     if values.dropna().empty:
-
         return np.nan
-
-
     return float(
         values.mean()
     )
 
-
-def safe_sum(
-    dataframe,
-    column
-):
-
-    if (
-        dataframe.empty
-        or
-        column not in dataframe.columns
-    ):
-
+def safe_sum(dataframe, column):
+    if (dataframe.empty or column not in dataframe.columns):
         return np.nan
-
-
-    values = pd.to_numeric(
-        dataframe[column],
-        errors="coerce"
-    )
-
-
+    values = pd.to_numeric(dataframe[column], errors="coerce")
     if values.dropna().empty:
-
         return np.nan
+    return float(values.sum())
 
-
-    return float(
-        values.sum()
-    )
-
-
-def format_percent(
-    value
-):
-
-    if pd.isna(
-        value
-    ):
-
+def format_percent(value):
+    if pd.isna(value):
         return "—"
-
-
     return f"{value:.2f}%"
 
-
-def format_data(
-    value_mb
-):
-
-    if pd.isna(
-        value_mb
-    ):
-
+def format_data(value_mb):
+    if pd.isna(value_mb):
         return "—"
-
-
     # MB → GB → TB
-
-    value_gb = (
-        value_mb
-        /
-        1024
-    )
-
-
+    value_gb = (value_mb / 1024)
     if value_gb >= 1024:
-
-        return (
-            f"{value_gb / 1024:.2f} TB"
-        )
-
-
+        return (f"{value_gb / 1024:.2f} TB")
     return f"{value_gb:.2f} GB"
 
-
-def format_voice(
-    value
-):
-
-    if pd.isna(
-        value
-    ):
-
+def format_voice(value):
+    if pd.isna(value):
         return "—"
-
-
     if value >= 1_000_000:
-
-        return (
-            f"{value / 1_000_000:.2f}M Erl"
-        )
-
-
+        return (f"{value / 1_000_000:.2f}M Erl")
     if value >= 1000:
-
-        return (
-            f"{value / 1000:.2f}K Erl"
-        )
-
-
+        return (f"{value / 1000:.2f}K Erl")
     return f"{value:.0f} Erl"
 
-
-# ============================================================
 # HEALTH LOGIC
-# ============================================================
-
-def technology_status(
-    availability,
-    accessibility
-):
-
-    values = [
-        value
-        for value in [
-            availability,
-            accessibility
-        ]
-        if pd.notna(
-            value
-        )
+def technology_status(availability, accessibility):
+    values = [value for value in [availability, accessibility]
+        if pd.notna(value)
     ]
-
-
     if not values:
-
         return "No Data"
-
-
-    minimum = min(
-        values
-    )
-
-
+    minimum = min(values)
     if minimum >= 98:
-
         return "Good"
-
-
     if minimum >= 95:
-
         return "Watch"
-
-
     return "Critical"
 
-
-# ============================================================
 # PLOTLY BASE STYLE
-# ============================================================
-
-def clean_chart(
-    figure,
-    height=260,
-    legend=False
-):
-
+def clean_chart(figure, height=260, legend=False):
     figure.update_layout(
-
         height=height,
-
-        margin=dict(
-            l=10,
-            r=10,
-            t=10,
-            b=10
-        ),
-
+        margin=dict(l=10, r=10, t=10, b=10),
         paper_bgcolor=CHART_BG,
-
         plot_bgcolor=CHART_BG,
-
-        font=dict(
-            family="Arial",
-            size=11,
-            color=TEXT_SECONDARY
-        ),
-
-        hoverlabel=dict(
-            bgcolor=CHART_BG,
-            font_color=TEXT_PRIMARY
-        ),
-
+        font=dict(family="Arial", size=11, color=TEXT_SECONDARY),
+        hoverlabel=dict(bgcolor=CHART_BG, font_color=TEXT_PRIMARY),
         showlegend=legend,
-
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="left",
-            x=0
-        )
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0)
     )
 
-
-    figure.update_xaxes(
-
-        showgrid=False,
-
-        zeroline=False,
-
-        linecolor=GRID,
-
-        tickfont=dict(
-            color=TEXT_SECONDARY
-        )
-    )
-
-
-    figure.update_yaxes(
-
-        showgrid=True,
-
-        gridcolor=GRID,
-
-        zeroline=False,
-
-        tickfont=dict(
-            color=TEXT_SECONDARY
-        )
-    )
-
-
+    figure.update_xaxes(showgrid=False, zeroline=False, linecolor=GRID, tickfont=dict(color=TEXT_SECONDARY))
+    figure.update_yaxes(showgrid=True, gridcolor=GRID, zeroline=False, tickfont=dict(color=TEXT_SECONDARY))
     return figure
 
-
-# ============================================================
 # DATABASE CHECK
-# ============================================================
-
 if not database_has_data():
-
     st.markdown(
         (
             '<div class="overview-wrapper">'
@@ -680,35 +410,13 @@ if not database_has_data():
 
     st.stop()
 
-
-# ============================================================
 # DATABASE INFORMATION
-# ============================================================
+database_summary = (get_database_summary())
+latest_date = (get_latest_kpi_date())
+latest_summary = (get_latest_network_summary())
+technology_health = (get_latest_technology_health())
 
-database_summary = (
-    get_database_summary()
-)
-
-
-latest_date = (
-    get_latest_kpi_date()
-)
-
-
-latest_summary = (
-    get_latest_network_summary()
-)
-
-
-technology_health = (
-    get_latest_technology_health()
-)
-
-
-# ============================================================
 # PAGE HEADER
-# ============================================================
-
 st.markdown(
     (
         '<div class="overview-wrapper">'
@@ -723,26 +431,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-# ============================================================
 # TOP CONTROL BAR
-# ============================================================
-
-control_left, control_period, control_refresh = (
-    st.columns(
-        [
-            5.0,
-            1.3,
-            0.9
-        ]
-    )
-)
-
-
+control_left, control_period, control_refresh = (st.columns([5.0, 1.3, 0.9]))
 with control_left:
-
     if latest_date is not None:
-
         st.markdown(
             (
                 '<div class="overview-reporting-info">'
@@ -759,101 +451,37 @@ with control_left:
 
 
 with control_period:
-
     selected_period = st.selectbox(
         "Period",
-
-        [
-            "Last 7 Days",
-            "Last 14 Days",
-            "Last 30 Days",
-            "All Data"
-        ],
-
+        ["Last 7 Days", "Last 14 Days", "Last 30 Days", "All Data"],
         index=2,
-
         label_visibility="collapsed",
-
         key="overview_period"
     )
 
-
 with control_refresh:
-
-    if st.button(
-        "↻ Refresh",
-        use_container_width=True,
-        key="overview_refresh"
-    ):
-
+    if st.button("↻ Refresh", use_container_width=True, key="overview_refresh"):
         st.cache_data.clear()
-
         st.rerun()
 
-
-# ============================================================
 # DATE RANGE FOR TRENDS
-# ============================================================
-
 if latest_date is None:
-
     trend_df = pd.DataFrame()
 
-
 else:
-
     if selected_period == "Last 7 Days":
-
-        start_date = (
-            latest_date
-            -
-            pd.Timedelta(
-                days=6
-            )
-        )
-
-
+        start_date = (latest_date - pd.Timedelta(days=6))
     elif selected_period == "Last 14 Days":
-
-        start_date = (
-            latest_date
-            -
-            pd.Timedelta(
-                days=13
-            )
-        )
-
-
+        start_date = (latest_date - pd.Timedelta(days=13))
     elif selected_period == "Last 30 Days":
-
-        start_date = (
-            latest_date
-            -
-            pd.Timedelta(
-                days=29
-            )
-        )
-
-
+        start_date = (latest_date - pd.Timedelta(days=29))
     else:
-
         start_date = None
 
+    trend_df = get_kpi_data_by_date(start_date=start_date, end_date=latest_date)
 
-    trend_df = get_kpi_data_by_date(
-        start_date=start_date,
-        end_date=latest_date
-    )
-
-
-# ============================================================
 # TOP KPI VALUES
-# ============================================================
-
-network_availability = latest_summary.get(
-    "network_availability",
-    np.nan
-)
+network_availability = latest_summary.get("network_availability", np.nan)
 
 
 total_data_mb = latest_summary.get(
