@@ -1529,35 +1529,35 @@ def navigation(
             if technology_choice == "2G":
 
                 st.switch_page(
-                    "pages/technology_2g.py"
+                    "pages/technology_2G.py"
                 )
 
 
             elif technology_choice == "3G":
 
                 st.switch_page(
-                    "pages/technology_3g.py"
+                    "pages/technology_3G.py"
                 )
 
 
             elif technology_choice == "4G":
 
                 st.switch_page(
-                    "pages/technology_4g.py"
+                    "pages/technology_4G.py"
                 )
 
 
             elif technology_choice == "5G":
 
                 st.switch_page(
-                    "pages/technology_5g.py"
+                    "pages/technology_5G.py"
                 )
 
 
             elif technology_choice == "VoLTE":
 
                 st.switch_page(
-                    "pages/technology_volte.py"
+                    "pages/technology_Volte.py"
                 )
 
 
