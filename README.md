@@ -1,10 +1,27 @@
 # Network Performance Dashboard
 
-**A Sentinel-inspired network operations dashboard built with Python, Streamlit, and Plotly.**
+**Turn daily telecom KPIs into comparable trends, traceable investigations, and exportable reports.**
 
-Developed by **Leonard Oluka**, this portfolio project demonstrates how network KPI data can be organized into visual dashboards for performance monitoring, site analysis, and reporting.
+A Python engineering portfolio project by **Leonard Oluka**, with a Sentinel-inspired Streamlit interface. Built to demonstrate network-domain analysis, data-quality handling, interactive visualization, persistent imports and explainable decision support.
 
-> **Demo data:** This repository uses sample data only. It does not contain real company or live network data.
+> Sample and uploaded KPI data only. No real company-network access, trained predictive AI, production impact or financial savings are claimed.
+
+## Review the project
+
+- **In the app:** open **Project case study** for a five-minute guided review.
+- **Engineering narrative:** [Case study, decisions, calculation methods and limits](docs/CASE_STUDY.md).
+- **Working evidence:** run the app, inspect the source and execute `python -m unittest discover -s tests -v`.
+- **Automated verification:** regression CI plus a browser workflow that captures real desktop/mobile screenshots. Check Actions for its latest outcome.
+
+## What makes the analysis useful
+
+| Reviewer question | Implemented answer |
+| --- | --- |
+| What changed? | Latest-two-reporting-date comparisons on matched site/counter pairs, with reporting gaps labeled. |
+| Is growth just new coverage? | Added/removed site counts and exclusion of unmatched measurements from comparison. |
+| What needs investigation? | Latest-day rule-based queue, visible thresholds, suggested owners and source evidence. |
+| Can I trust the measurements? | Valid percentage-cell coverage, invalid values, repeated keys, missing site IDs and reporting age. |
+| Can I share the evidence? | Investigation CSV and existing filtered CSV, Excel and PDF report workflows. |
 
 ## Project overview
 
@@ -38,7 +55,7 @@ The navigation shell lives in `navigation.py`; shared presentation tokens and ch
 python -m unittest discover -s tests -v
 ```
 
-The regression suite renders all eleven pages in an isolated copy and checks sidebar routing, technology routing, theme switching, and chart rendering. It leaves the repository's KPI database unchanged. This verifies application execution and controls, not pixel-level browser appearance.
+The regression suite renders all twelve pages in an isolated copy and checks analytical edge cases, sidebar routing, technology routing, theme switching, and chart rendering. It leaves the repository's KPI database unchanged. This verifies application execution and controls, not pixel-level browser appearance.
 
 ## Technology stack
 
@@ -127,7 +144,7 @@ Network-Performance/
 
 ## Dashboard screenshots
 
-Screenshots captured from the running application using sample data.
+Screenshots are captured from the running sample-data application. The browser workflow refreshes them after interface changes; check its latest successful run before treating these images as the current build.
 
 ### Network overview
 

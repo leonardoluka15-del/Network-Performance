@@ -12,6 +12,7 @@ PAGES = [
     ('Report', '▤  Reports & exports', 'pages/5_Report.py'),
     ('Alarms', '⚑  Alerts & alarms', 'pages/6_Alarms.py'),
     ('Settings', '⚙  Settings', 'pages/7_Settings.py'),
+    ('Project', '◇  Project case study', 'pages/8_Project.py'),
 ]
 TECHNOLOGIES = ['2G', '3G', '4G', '5G', 'VoLTE']
 

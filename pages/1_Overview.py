@@ -1,3 +1,4 @@
+from portfolio_components import render_briefing
 from sentinel_theme import style_chart, palette
 import streamlit as st
 import pandas as pd
@@ -495,10 +496,8 @@ hosr = latest_summary.get(
 st.write("")
 
 
-k1, k2, k3, k4, k5, k6 = st.columns(
-    6,
-    gap="small"
-)
+k1, k2, k3 = st.columns(3, gap="small")
+k4, k5, k6 = st.columns(3, gap="small")
 
 
 with k1:
@@ -576,6 +575,8 @@ with k6:
 # ============================================================
 # TECHNOLOGY HEALTH
 # ============================================================
+
+render_briefing(trend_df)
 
 st.write("")
 

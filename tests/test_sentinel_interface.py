@@ -34,12 +34,22 @@ class SentinelInterfaceTests(unittest.TestCase):
 
     def test_existing_pages_render(self):
         pages = ['1_Overview', '3_KPI_Upload', '4_Site_Analytics', '5_Report',
-                 '6_Alarms', '7_Settings', 'technology_2G', 'technology_3G',
+                 '6_Alarms', '7_Settings', '8_Project', 'technology_2G', 'technology_3G',
                  'technology_4G', 'technology_5G', 'technology_VoLTE']
         for name in pages:
             with self.subTest(page=name):
                 app = self.page('pages/' + name + '.py')
                 self.assertTrue(any('NETWORK OPS' in m.value for m in app.sidebar.markdown))
+
+    def test_briefing_and_case_study_route(self):
+        app = self.page('app.py')
+        self.assertTrue(any('Operational briefing' in m.value for m in app.markdown))
+        app.button(key='sentinel_link_Project').click().run()
+        self.assertEqual([e.message for e in app.exception], [])
+        self.assertTrue(any('From network signals' in m.value for m in app.markdown))
+        app.button(key='project_start').click().run()
+        self.assertEqual([e.message for e in app.exception], [])
+        self.assertTrue(any('Operational briefing' in m.value for m in app.markdown))
 
     def test_theme_and_refresh_controls(self):
         app = self.page('pages/7_Settings.py')
