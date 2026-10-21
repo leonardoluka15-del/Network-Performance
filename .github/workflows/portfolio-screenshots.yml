@@ -1,0 +1,101 @@
+name: Refresh portfolio screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/portfolio-screenshots.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install application and screenshot dependencies
+        run: |
+          python -m pip install -r requirements.txt 'streamlit==1.58.0' playwright
+          python -m playwright install --with-deps chromium
+      - name: Capture real dashboard pages
+        run: |
+          python -m streamlit run app.py --server.headless true --browser.gatherUsageStats false > /tmp/streamlit.log 2>&1 &
+          python - <<'PY'
+          import pathlib
+          import time
+          import urllib.request
+          from playwright.sync_api import sync_playwright
+
+          for attempt in range(60):
+              try:
+                  urllib.request.urlopen("http://localhost:8501/_stcore/health", timeout=2)
+                  break
+              except Exception:
+                  time.sleep(1)
+          else:
+              raise RuntimeError("Streamlit did not start")
+
+          output = pathlib.Path("docs/screenshots")
+          output.mkdir(parents=True, exist_ok=True)
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              page = browser.new_page(viewport={"width": 1600, "height": 1100}, device_scale_factor=1)
+              page.goto("http://localhost:8501", wait_until="domcontentloaded")
+
+              def capture(filename):
+                  page.get_by_test_id("stAppViewContainer").wait_for()
+                  page.wait_for_timeout(6000)
+                  errors = page.get_by_test_id("stException")
+                  if errors.count():
+                      raise RuntimeError(errors.all_text_contents())
+                  if page.get_by_test_id("stPlotlyChart").count() == 0:
+                      raise RuntimeError("No dashboard charts rendered")
+                  page.screenshot(path=str(output / filename), full_page=False)
+
+              capture("overview.png")
+              page.get_by_role("combobox").first.click()
+              page.get_by_role("option", name="4G", exact=True).click()
+              capture("technology-4g.png")
+              page.get_by_role("button", name="SITE ANALYTICS", exact=True).click()
+              capture("site-analytics.png")
+              browser.close()
+
+          readme = pathlib.Path("README.md")
+          content = readme.read_text()
+          old = "Dashboard screenshots have not yet been added to this repository. Run the application locally to explore the current interface."
+          new = """Screenshots captured from the running application using sample data.
+
+          ### Network overview
+
+          ![Network overview dashboard](docs/screenshots/overview.png)
+
+          ### 4G technology dashboard
+
+          ![4G network performance dashboard](docs/screenshots/technology-4g.png)
+
+          ### Site analytics
+
+          ![Site analytics dashboard](docs/screenshots/site-analytics.png)"""
+          if old in content:
+              readme.write_text(content.replace(old, new))
+          elif "docs/screenshots/overview.png" not in content:
+              raise RuntimeError("README screenshot section changed; review before updating")
+          PY
+      - name: Save screenshot changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: add real dashboard screenshots to portfolio README"
+            git push
+          fi
+      - name: Preserve diagnostics
+        if: failure()
+        run: cat /tmp/streamlit.log
