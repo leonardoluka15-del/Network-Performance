@@ -1,5 +1,6 @@
 """Responsive, consistently typeset summary cards with real source-data sparklines."""
 from html import escape
+import base64
 import math
 import re
 import pandas as pd
@@ -16,6 +17,13 @@ ICONS = {
 }
 
 
+def _svg_image(svg, css_class, alt):
+    # Streamlit sanitizes inline SVG in st.html. An SVG image preserves its
+    # shape without JavaScript or external requests.
+    encoded = base64.b64encode(svg.encode()).decode()
+    return f'<img class="{css_class}" src="data:image/svg+xml;base64,{encoded}" alt="{escape(alt)}"/>'
+
+
 def _sparkline(values, color):
     values = [float(v) for v in values if v is not None and math.isfinite(float(v))]
     if len(values) < 2:
@@ -25,7 +33,8 @@ def _sparkline(values, color):
     points = [(i*156/(len(values)-1), 34-(v-low)/span*26) for i,v in enumerate(values)]
     line = ' '.join(f'{x:.1f},{y:.1f}' for x,y in points)
     area = '0,42 '+line+' 156,42'
-    return f'<svg class="metric-spark" viewBox="0 0 156 44" aria-label="Source window trend" role="img"><polygon points="{area}" fill="{color}" opacity=".08"/><polyline points="{line}" fill="none" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 44"><polygon points="{area}" fill="{color}" opacity=".08"/><polyline points="{line}" fill="none" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    return _svg_image(svg, 'metric-spark', 'Source window trend')
 
 
 def render_metric_cards(frame, summary):
@@ -53,7 +62,8 @@ def render_metric_cards(frame, summary):
         else:
             value,suffix=(value/1_000_000,'M Erl') if value>=1_000_000 else (value/1000,'K Erl') if value>=1000 else (value,'Erl')
             number=f'{value:,.2f}'
-        icon=f'<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[key]}</svg>'
+        svg=f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{ICONS[key]}</svg>'
+        icon=_svg_image(svg, 'metric-icon-image', '')
         cards.append(f'<article class="metric-tile" style="--tile-accent:{color}"><div class="metric-tile-top"><span class="metric-tile-label">{label}</span><span class="metric-tile-icon">{icon}</span></div><div class="metric-tile-number">{escape(number)}<span>{escape(suffix)}</span></div><div class="metric-tile-bottom"><span>{note}</span>{_sparkline(history[key],color)}</div></article>')
     st.html('<div class="metric-grid">'+''.join(cards)+'</div>')
     st.caption('Latest reporting day · Sparklines show the selected source-data window')

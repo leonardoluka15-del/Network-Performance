@@ -86,3 +86,9 @@
 @media(max-width:1100px){#root [data-testid="stMainBlockContainer"]{padding-left:1.25rem!important;padding-right:1.25rem!important}#root .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#root .sentinel-topbar-right>span{display:none}}
 @media(max-width:640px){#root [data-testid="stMainBlockContainer"]{padding:3.1rem 1rem 2rem!important}#root .sentinel-topbar{margin-bottom:14px;font-size:11px}#root .sentinel-eyebrow{font-size:10px}#root .stApp :is(.overview-title,.technology-title,.site-title,.report-title,.settings-title,.upload-title,.alarms-title){font-size:25px!important}#root .metric-grid{gap:10px}#root .metric-tile{padding:14px 12px;min-height:148px}#root .metric-tile-label{font-size:12px}#root .metric-tile-icon{display:none}#root .metric-tile-number{font-size:27px;gap:4px;margin-top:17px}#root .metric-tile-number>span{font-size:12px}#root .metric-tile-bottom{height:auto;min-height:32px;align-items:flex-start}#root .metric-tile-bottom>span{font-size:10px;max-width:100%}#root .metric-spark{display:none}#root .stApp div[class*="st-key-"][class*="_panel_"]{padding:15px!important}#root [data-testid="stHorizontalBlock"]:has(> [data-testid="stColumn"] [class*="_kpi_"]){grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){#root .metric-tile{transition:none}#root .metric-tile:hover{transform:none}}
+
+#root .metric-icon-image{width:19px;height:19px;display:block}
+#root [data-testid="stSidebar"] details{border:0!important;background:transparent!important}
+#root [data-testid="stSidebar"] details>div{padding:4px 0!important}
+#root [data-testid="stSidebar"] details .stButton button{padding:10px 8px!important}
+#root [data-testid="stSidebar"] details .stButton button p{white-space:nowrap!important}

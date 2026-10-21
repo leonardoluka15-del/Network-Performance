@@ -42,6 +42,11 @@ with sync_playwright() as p:
     label_size = page.locator('.metric-tile-label').first.evaluate('(el) => parseFloat(getComputedStyle(el).fontSize)')
     if label_size < 12:
         raise RuntimeError('Metric labels are too small')
+    if page.locator('img.metric-spark').count() != 6:
+        raise RuntimeError('Source-data sparklines did not render')
+    broken = page.locator('.metric-grid img').evaluate_all('(images) => images.some(img => !img.complete || img.naturalWidth === 0)')
+    if broken:
+        raise RuntimeError('Card image failed to load')
     capture('overview.png')
     page.get_by_role('tab', name='Investigation queue', exact=True).click()
     capture('investigation-queue.png')
