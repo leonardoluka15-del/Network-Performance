@@ -56,3 +56,7 @@
 #root .stApp [data-testid="stMetricValue"] {color:var(--s-text)!important}
 @media(max-width:900px) {#root [data-testid="stMainBlockContainer"]{padding:1.2rem 1rem 2rem!important}#root .sentinel-topbar-right>span{display:none}#root .stApp :is(.overview-title,.technology-title,.site-title,.report-title){font-size:26px!important}}
 @media(prefers-reduced-motion:no-preference) {#root .stApp button{transition:background .15s,border-color .15s}}
+/* Leave room for Streamlit's fixed header and its mobile sidebar toggle. */
+#root [data-testid="stMainBlockContainer"] {padding-top:3.8rem!important}
+#root [data-testid="stToolbarActions"] {visibility:hidden}
+@media(max-width:900px) {#root [data-testid="stMainBlockContainer"] {padding-top:3.4rem!important}}

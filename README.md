@@ -72,7 +72,7 @@ The regression suite renders all twelve pages in an isolated copy and checks ana
 
 ## Run locally
 
-Install Python and Git, then run the following commands from your terminal.
+Use **Python 3.11 or 3.12** and Git, then run the following commands. Direct runtime dependencies are pinned in `requirements.txt` for repeatable demonstrations; Python 3.10 is not supported by the pinned Streamlit release.
 
 ### 1. Clone the repository
 
@@ -157,6 +157,16 @@ Screenshots are captured from the running sample-data application. The browser w
 ### Site analytics
 
 ![Site analytics dashboard](docs/screenshots/site-analytics.png)
+
+### Investigation workflow
+
+![Prioritized investigation queue with source evidence](docs/screenshots/investigation-queue.png)
+
+### Project case study
+
+![In-app engineering case study](docs/screenshots/project-case-study.png)
+
+A [mobile screenshot](docs/screenshots/overview-mobile.png) is also captured by the browser verification workflow.
 
 ## Custom dashboard services
 

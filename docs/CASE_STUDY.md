@@ -53,6 +53,8 @@ The queue flags latest-day site averages below 99% availability, below 98% acces
 
 The suite includes 13 tests and renders all 12 functional dashboard pages. It checks changes in site coverage, missing counters, zero baselines, duplicate records, invalid values, reporting gaps, thresholds, sidebar routing, chart rendering and theme controls. Interface tests run in a temporary copy so they do not modify the repository database.
 
+Direct dependencies are pinned to the locally tested versions; supported CI runtimes are Python 3.11 and 3.12. Python 3.10 selects an older Streamlit release with different navigation-test behavior and is outside this verified runtime.
+
 A separate GitHub Actions job exercises the real browser and captures desktop/mobile images. Its outcome must be checked in Actions; a configured workflow alone does not establish a passed browser test.
 
 The portfolio does not claim live device collection, per-user access control, predictive AI, validated causal diagnosis or demonstrated financial savings. Some technology, site and alarm views can use generated or session-based demo datasets; they are not automatically the same dataset as the overview. Production use would require coherent data contracts across pages, durable hosted storage, identity and permissions, telemetry integration, and operational validation.
