@@ -1,62 +1,88 @@
-/* The #root scope deliberately wins over retained, page-specific legacy CSS. */
-#root .stApp {background:var(--s-page)!important;color:var(--s-text)!important;font-family:Inter,'Segoe UI',Arial,sans-serif!important}
-#root [data-testid="stHeader"] {background:var(--s-page)!important;height:2.8rem;border-bottom:1px solid var(--s-border)}
-#root [data-testid="stHeader"]::before {content:none!important}
-#root [data-testid="stToolbar"] {background:transparent!important}
-#root [data-testid="stMainBlockContainer"] {padding:1.5rem 2.1rem 3rem!important;max-width:1680px!important}
-#root [data-testid="stSidebar"] {display:block!important;background:#0d131c!important;border-right:1px solid #222c3a!important;color:#e7edf6!important;min-width:240px!important;max-width:260px!important}
-#root [data-testid="stSidebarContent"] {padding-top:.5rem}
-#root [data-testid="stSidebar"] [data-testid="stSidebarNav"] {display:none}
-#root [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {color:#8390a4}
-#root [data-testid="stSidebar"] [data-testid="stExpander"] {background:transparent!important;border:0!important}
-#root [data-testid="stSidebar"] details summary {color:#c4cfde!important;font-size:12px!important;padding:10px 4px!important}
-#root [data-testid="stSidebar"] details summary p {color:#c4cfde!important;font-size:12px!important}
-#root [data-testid="stSidebar"] .stButton button {width:100%;justify-content:flex-start;text-align:left;background:transparent!important;border:1px solid transparent!important;box-shadow:none!important;border-radius:7px!important;color:#a2b0c3!important;min-height:42px;padding:10px 12px!important;font-size:12px!important}
-#root [data-testid="stSidebar"] .stButton button p {font-size:12px!important;color:inherit!important}
-#root [data-testid="stSidebar"] .stButton button[kind="primary"] {color:#64e9b1!important;border-color:#224237!important;background:#152b29!important}
-#root [data-testid="stSidebar"] .stButton button:hover {color:#64e9b1!important;background:#14251f!important}
-#root .sentinel-brand {display:flex;gap:12px;align-items:center;color:#e7edf6;padding:16px 8px 26px;font-size:19px;font-weight:750;letter-spacing:1.7px;white-space:nowrap}
-#root .sentinel-brand>span {font-size:37px;color:#64e9b1;font-weight:400}
-#root .sentinel-brand small {display:block;font-size:7px;color:#8390a4;letter-spacing:1.5px;margin-top:7px}
-#root .sentinel-workspace {padding:8px 10px 24px;font-size:9px;color:#8390a4;letter-spacing:1.6px}
-#root .sentinel-workspace strong {display:block;color:#bdc9d9;font-size:12px;letter-spacing:0;margin-top:12px;font-weight:500}
-#root .sentinel-section-label {padding:22px 10px 8px;color:#64748b;font-size:8px;letter-spacing:1.7px}
-#root .sentinel-sidebar-footer {margin:40px 10px 10px;padding-top:22px;border-top:1px solid #222c3a;color:#9baabe;font-size:9px;letter-spacing:1px;line-height:1.8}
-#root .sentinel-sidebar-footer>span {color:#64e9b1}
-#root .sentinel-sidebar-footer small {display:block;margin-top:12px;font-size:10px;letter-spacing:0;color:#8390a4}
-#root .sentinel-topbar {height:48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--s-border);color:var(--s-muted);font-size:9px;letter-spacing:1.2px;gap:15px;margin-bottom:20px}
-#root .sentinel-topbar span {color:var(--s-secondary)}
-#root .sentinel-topbar-right {display:flex;gap:20px;align-items:center;letter-spacing:0}
-#root .sentinel-topbar-right b {border:1px solid #57503a;border-radius:20px;color:#b28a40;padding:5px 10px;font-size:8px;font-weight:500;letter-spacing:1px}
-#root .sentinel-eyebrow {font-size:9px;letter-spacing:2px;color:var(--s-accent);margin-top:8px}
-#root .stApp [class$="-wrapper"] {padding:5px 0 14px!important;font-family:inherit!important}
-#root .stApp :is(.overview-title,.upload-title,.site-title,.report-title,.alarms-title,.technology-title,.settings-title,.dashboard-title) {font-family:inherit!important;font-size:30px!important;font-weight:650!important;letter-spacing:-.9px!important;color:var(--s-text)!important;margin-top:0!important}
-#root .stApp :is(.overview-subtitle,.upload-subtitle,.site-subtitle,.report-subtitle,.alarms-subtitle,.technology-subtitle,.settings-subtitle,.dashboard-subtitle) {font-family:inherit!important;color:var(--s-muted)!important;font-size:12px!important;line-height:1.8!important;margin-top:8px!important}
-#root .stApp div[class*="st-key-"][class*="_panel_"],#root .stApp div[class*="st-key-"][class*="_kpi_"] {background:var(--s-panel)!important;border:1px solid var(--s-border)!important;border-radius:10px!important;box-shadow:0 8px 24px #0000000a!important;box-sizing:border-box!important;overflow:hidden}
-#root .stApp div[class*="st-key-"][class*="_kpi_"] {position:relative;min-height:134px}
-#root .stApp div[class*="st-key-"][class*="_kpi_"]::after {content:'';position:absolute;bottom:0;left:0;width:65%;height:2px;background:linear-gradient(90deg,var(--s-accent),transparent);pointer-events:none}
-#root .stApp div[class*="st-key-"][class*="_panel_"] [data-testid="stVerticalBlockBorderWrapper"],#root .stApp div[class*="st-key-"][class*="_kpi_"] [data-testid="stVerticalBlockBorderWrapper"] {background:transparent!important;border:0!important;box-shadow:none!important}
-#root .stApp :is(.panel-title,.section-title) {color:var(--s-text)!important;font-size:14px!important;font-weight:600!important;font-family:inherit!important}
-#root .stApp .panel-subtitle {color:var(--s-muted)!important;font-size:10px!important;font-weight:400!important;line-height:1.7!important}
-#root .stApp :is(.overview-kpi-label,.kpi-title,.upload-kpi-title,.site-kpi-title,.report-kpi-title,.alarm-kpi-title,.technology-kpi-title,.kpi-label) {color:var(--s-secondary)!important;text-transform:uppercase;letter-spacing:1.3px!important;font-size:9px!important;font-weight:500!important}
-#root .stApp :is(.overview-kpi-value,.kpi-value,.upload-kpi-value,.site-kpi-value,.report-kpi-value,.alarm-kpi-value,.technology-kpi-value) {color:var(--s-text)!important;font-size:30px!important;font-weight:600!important;letter-spacing:-.8px!important;line-height:1.3!important}
-#root .stApp :is(.overview-kpi-note,.report-kpi-note,.alarm-kpi-note,.technology-kpi-note,.site-kpi-neutral,.settings-current,.overview-reporting-info) {color:var(--s-muted)!important;font-size:10px!important;font-weight:400!important}
-#root .stApp :is(.health-good,.kpi-delta-positive) {color:var(--s-accent)!important}
-#root .stApp .health-watch {color:#eebe6a!important}
-#root .stApp :is(.health-critical,.kpi-delta-negative) {color:#ff7285!important}
-#root .stApp [data-testid="stWidgetLabel"] p {color:var(--s-secondary)!important;font-size:11px!important}
-#root .stApp [data-baseweb="select"]>div,#root .stApp input,#root .stApp textarea {background:var(--s-input)!important;color:var(--s-text)!important;border-color:var(--s-border)!important}
-#root .stApp [data-baseweb="select"] span {color:var(--s-text)!important}
-#root .stApp :is(.stButton,.stDownloadButton) button {background:var(--s-input);border:1px solid var(--s-border);color:var(--s-text);border-radius:7px;font-size:12px;box-shadow:none}
-#root .stApp :is(.stButton,.stDownloadButton) button:hover {border-color:var(--s-accent);color:var(--s-accent)}
-#root .stApp [data-testid="stFileUploaderDropzone"] {background:var(--s-panel)!important;border:1px dashed var(--s-border)!important;color:var(--s-secondary)!important}
-#root .stApp [data-testid="stCaptionContainer"] {color:var(--s-muted)!important;font-size:11px}
-#root .stApp [data-testid="stDataFrame"] {border:1px solid var(--s-border);border-radius:7px;overflow:hidden}
-#root .stApp [data-testid="stMetricLabel"] {color:var(--s-secondary)!important}
-#root .stApp [data-testid="stMetricValue"] {color:var(--s-text)!important}
-@media(max-width:900px) {#root [data-testid="stMainBlockContainer"]{padding:1.2rem 1rem 2rem!important}#root .sentinel-topbar-right>span{display:none}#root .stApp :is(.overview-title,.technology-title,.site-title,.report-title){font-size:26px!important}}
-@media(prefers-reduced-motion:no-preference) {#root .stApp button{transition:background .15s,border-color .15s}}
-/* Leave room for Streamlit's fixed header and its mobile sidebar toggle. */
-#root [data-testid="stMainBlockContainer"] {padding-top:3.8rem!important}
-#root [data-testid="stToolbarActions"] {visibility:hidden}
-@media(max-width:900px) {#root [data-testid="stMainBlockContainer"] {padding-top:3.4rem!important}}
+/* One typography and spacing system across the entire application. */
+@font-face{font-family:Inter;src:url('/app/static/fonts/inter-latin.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+#root .stApp{background:var(--s-page)!important;color:var(--s-text)!important;font-family:Inter,'Segoe UI',sans-serif!important;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+#root .stApp :is(p,h1,h2,h3,h4,h5,h6,button,input,textarea,label,summary,th,td){font-family:Inter,'Segoe UI',sans-serif!important}
+#root .stApp :is(p,button,input,textarea){font-size:14px;line-height:1.55}
+#root .stApp h1{font-size:32px;font-weight:650;letter-spacing:-1px}
+#root .stApp h2{font-size:23px;font-weight:600;letter-spacing:-.5px}
+#root .stApp h3{font-size:18px;font-weight:600;letter-spacing:-.3px}
+#root [data-testid="stHeader"]{background:var(--s-page)!important;height:2.8rem;border:0}
+#root [data-testid="stHeader"]::before{content:none!important}
+#root [data-testid="stToolbar"]{background:transparent!important}
+#root [data-testid="stToolbarActions"]{visibility:hidden}
+#root [data-testid="stMainBlockContainer"]{padding:3.2rem 2rem 3rem!important;max-width:1580px!important}
+/* Navigation: normal sentence case, native icons, generous click targets. */
+#root [data-testid="stSidebar"]{display:block!important;background:#0e1727!important;border-right:1px solid #233148!important;min-width:250px!important;max-width:260px!important}
+#root [data-testid="stSidebarContent"]{padding-top:.25rem}
+#root [data-testid="stSidebar"] [data-testid="stSidebarNav"]{display:none}
+#root [data-testid="stSidebar"] [data-testid="stVerticalBlock"]{gap:.5rem}
+#root [data-testid="stSidebar"] [data-testid="stExpander"]{background:transparent!important;border:0!important}
+#root [data-testid="stSidebar"] details summary{color:#b3c2d8!important;padding:10px 6px!important;min-height:44px}
+#root [data-testid="stSidebar"] details summary p{font-size:13px!important;font-weight:500!important;color:#b3c2d8!important}
+#root [data-testid="stSidebar"] .stButton button{width:100%;justify-content:flex-start;text-align:left;background:transparent!important;border:1px solid transparent!important;border-radius:8px!important;color:#b3c2d8!important;min-height:44px;padding:11px 12px!important;box-shadow:none!important}
+#root [data-testid="stSidebar"] .stButton button p{font-size:13px!important;color:inherit!important;font-weight:500!important}
+#root [data-testid="stSidebar"] .stButton button[kind="primary"]{color:#8cf0d2!important;background:#19352f!important;border-color:#2d5045!important}
+#root [data-testid="stSidebar"] .stButton button:hover{color:#eff4fc!important;background:#1a2940!important}
+#root .sentinel-brand{display:flex;gap:12px;align-items:center;color:#eff4fc;padding:16px 2px 24px;font-size:17px;font-weight:700;letter-spacing:.3px}
+#root .sentinel-brand .brand-mark{display:grid;place-items:center;width:38px;height:42px;border-radius:11px;color:#0b2420;background:#70e1c4;font-weight:800;font-size:23px;transform:skew(-4deg)}
+#root .sentinel-brand small{display:block;font-size:11px;color:#98abc5;font-weight:400;letter-spacing:0;margin-top:4px}
+#root .sentinel-workspace{padding:10px 4px 20px;font-size:10px;font-weight:600;letter-spacing:1px;color:#8ea2c0}
+#root .sentinel-workspace strong{display:block;color:#d3ddeb;font-size:13px;letter-spacing:0;margin-top:7px;font-weight:500}
+#root .sentinel-section-label{padding:20px 8px 8px;color:#8ea2c0;font-size:10px;font-weight:600;letter-spacing:1px}
+#root .sentinel-sidebar-footer{margin:30px 4px 10px;padding-top:18px;border-top:1px solid #26344a;color:#adbed3;font-size:10px;letter-spacing:.3px;line-height:1.8}
+#root .sentinel-sidebar-footer>span{color:#70e1c4}
+#root .sentinel-sidebar-footer small{display:block;margin-top:9px;font-size:11px;color:#98abc5;letter-spacing:0}
+/* Workspace chrome and page headers. */
+#root .sentinel-topbar{height:42px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--s-border);color:var(--s-muted);font-size:12px;gap:16px;margin-bottom:20px}
+#root .sentinel-topbar span{color:var(--s-secondary)}
+#root .sentinel-topbar-right{display:flex;gap:16px;align-items:center;font-size:11px}
+#root .sentinel-topbar-right b{border:1px solid var(--s-border);border-radius:20px;color:var(--s-secondary);padding:4px 10px;font-size:11px;font-weight:500}
+#root .sentinel-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.3px;color:var(--s-accent);margin:0 0 2px}
+#root .stApp [class$="-wrapper"]{padding:0 0 6px!important;font-family:Inter,sans-serif!important}
+#root .stApp :is(.overview-title,.upload-title,.site-title,.report-title,.alarms-title,.technology-title,.settings-title,.dashboard-title){font-family:Inter,sans-serif!important;font-size:30px!important;font-weight:650!important;letter-spacing:-.8px!important;color:var(--s-text)!important;margin:0!important;line-height:1.25!important}
+#root .stApp :is(.overview-subtitle,.upload-subtitle,.site-subtitle,.report-subtitle,.alarms-subtitle,.technology-subtitle,.settings-subtitle,.dashboard-subtitle){font-family:Inter,sans-serif!important;color:var(--s-muted)!important;font-size:13px!important;line-height:1.6!important;margin:7px 0 4px!important}
+#root .stApp .overview-reporting-info{color:var(--s-muted)!important;font-size:12px!important;font-weight:400!important;padding-top:9px}
+/* The custom headline grid has no Streamlit column padding or independent text wrapping. */
+#root .metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;width:100%;margin:4px 0 0}
+#root .metric-tile{background:linear-gradient(115deg,var(--s-panel),var(--s-input));border:1px solid var(--s-border);border-radius:13px;padding:18px 20px 15px;min-width:0;min-height:156px;box-shadow:0 5px 18px #0000000d;transition:border-color .15s,transform .15s;overflow:hidden}
+#root .metric-tile:hover{border-color:#50617d;transform:translateY(-2px)}
+#root .metric-tile-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#root .metric-tile-label{font-size:13px;font-weight:500;color:var(--s-secondary);line-height:1.4;letter-spacing:0}
+#root .metric-tile-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#839bc014;color:var(--tile-accent);flex:none}
+#root .metric-tile-number{display:flex;align-items:baseline;gap:7px;white-space:nowrap;font-size:35px;font-weight:600;line-height:1.15;letter-spacing:-1.2px;color:var(--s-text);font-variant-numeric:tabular-nums;margin:10px 0 9px}
+#root .metric-tile-number>span{font-size:16px;font-weight:450;color:var(--s-muted);letter-spacing:0}
+#root .metric-tile-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;height:30px}
+#root .metric-tile-bottom>span{font-size:11px;color:var(--s-muted);line-height:1.5;max-width:65%}
+#root .metric-spark{width:95px;height:31px;flex:none;overflow:visible}
+#root .metric-no-trend{font-size:10px!important;color:var(--s-muted)}
+/* All legacy technology/upload/report cards and panels share the same visual scale. */
+#root .stApp div[class*="st-key-"][class*="_panel_"],#root .stApp div[class*="st-key-"][class*="_kpi_"]{background:var(--s-panel)!important;border:1px solid var(--s-border)!important;border-radius:12px!important;box-shadow:none!important;box-sizing:border-box!important;overflow:hidden}
+#root .stApp div[class*="st-key-"][class*="_panel_"]{padding:20px!important}
+#root .stApp div[class*="st-key-"][class*="_kpi_"]{min-height:148px;padding:18px!important}
+#root .stApp div[class*="st-key-"][class*="_kpi_"]::after{display:none!important}
+#root .stApp div[class*="st-key-"][class*="_panel_"] [data-testid="stVerticalBlockBorderWrapper"],#root .stApp div[class*="st-key-"][class*="_kpi_"] [data-testid="stVerticalBlockBorderWrapper"]{background:transparent!important;border:0!important;box-shadow:none!important}
+#root .stApp div[class*="st-key-"][class*="_kpi_"] [data-testid="stVerticalBlock"]{gap:.35rem!important}
+#root .stApp :is(.panel-title,.section-title){font-family:Inter,sans-serif!important;color:var(--s-text)!important;font-size:16px!important;font-weight:600!important;letter-spacing:-.2px!important}
+#root .stApp .panel-subtitle{color:var(--s-muted)!important;font-size:12px!important;font-weight:400!important;line-height:1.6!important;margin-top:4px!important}
+#root .stApp :is(.overview-kpi-label,.kpi-title,.upload-kpi-title,.site-kpi-title,.report-kpi-title,.alarm-kpi-title,.technology-kpi-title,.kpi-label){color:var(--s-secondary)!important;text-transform:none!important;letter-spacing:0!important;font-size:13px!important;font-weight:500!important;line-height:1.45!important}
+#root .stApp :is(.overview-kpi-value,.kpi-value,.upload-kpi-value,.site-kpi-value,.report-kpi-value,.alarm-kpi-value,.technology-kpi-value){font-family:Inter,sans-serif!important;color:var(--s-text)!important;font-size:30px!important;font-weight:600!important;letter-spacing:-.8px!important;line-height:1.35!important;font-variant-numeric:tabular-nums}
+#root .stApp :is(.overview-kpi-note,.report-kpi-note,.alarm-kpi-note,.technology-kpi-note,.site-kpi-neutral,.settings-current){color:var(--s-muted)!important;font-size:12px!important;font-weight:400!important;line-height:1.5!important}
+#root .stApp :is(.health-good,.kpi-delta-positive){color:var(--s-accent)!important}
+#root .stApp .health-watch{color:#f2bc79!important}
+#root .stApp :is(.health-critical,.kpi-delta-negative){color:#ff8798!important}
+#root .stApp [data-testid="stWidgetLabel"] p{color:var(--s-secondary)!important;font-size:13px!important;font-weight:450}
+#root .stApp [data-baseweb="select"]>div,#root .stApp input,#root .stApp textarea{background:var(--s-input)!important;color:var(--s-text)!important;border-color:var(--s-border)!important;border-radius:8px!important;font-size:13px}
+#root .stApp [data-baseweb="select"] span{color:var(--s-text)!important}
+#root .stApp :is(.stButton,.stDownloadButton) button{background:var(--s-input);border:1px solid var(--s-border);color:var(--s-text);border-radius:8px;box-shadow:none;min-height:40px}
+#root .stApp :is(.stButton,.stDownloadButton) button:hover{border-color:var(--s-accent);color:var(--s-accent)}
+#root .stApp [data-testid="stCaptionContainer"] p{color:var(--s-muted)!important;font-size:12px!important;line-height:1.6!important}
+#root .stApp [data-testid="stFileUploaderDropzone"]{background:var(--s-panel)!important;border:1px dashed var(--s-border)!important;color:var(--s-secondary)!important}
+#root .stApp [data-testid="stDataFrame"]{border:1px solid var(--s-border);border-radius:8px;overflow:hidden}
+#root .stApp [data-testid="stMetricLabel"] p{color:var(--s-secondary)!important;font-size:13px!important}
+#root .stApp [data-testid="stMetricValue"]{color:var(--s-text)!important;font-variant-numeric:tabular-nums}
+#root .stApp [data-baseweb="tab"]{padding:11px 16px;font-size:13px;font-weight:500}
+#root [data-testid="stHorizontalBlock"]:has(> [data-testid="stColumn"] [class*="_kpi_"]){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px!important}
+#root [data-testid="stHorizontalBlock"]:has(> [data-testid="stColumn"] [class*="_kpi_"])>[data-testid="stColumn"]{width:100%!important;min-width:0!important}
+@media(max-width:1100px){#root [data-testid="stMainBlockContainer"]{padding-left:1.25rem!important;padding-right:1.25rem!important}#root .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#root .sentinel-topbar-right>span{display:none}}
+@media(max-width:640px){#root [data-testid="stMainBlockContainer"]{padding:3.1rem 1rem 2rem!important}#root .sentinel-topbar{margin-bottom:14px;font-size:11px}#root .sentinel-eyebrow{font-size:10px}#root .stApp :is(.overview-title,.technology-title,.site-title,.report-title,.settings-title,.upload-title,.alarms-title){font-size:25px!important}#root .metric-grid{gap:10px}#root .metric-tile{padding:14px 12px;min-height:148px}#root .metric-tile-label{font-size:12px}#root .metric-tile-icon{display:none}#root .metric-tile-number{font-size:27px;gap:4px;margin-top:17px}#root .metric-tile-number>span{font-size:12px}#root .metric-tile-bottom{height:auto;min-height:32px;align-items:flex-start}#root .metric-tile-bottom>span{font-size:10px;max-width:100%}#root .metric-spark{display:none}#root .stApp div[class*="st-key-"][class*="_panel_"]{padding:15px!important}#root [data-testid="stHorizontalBlock"]:has(> [data-testid="stColumn"] [class*="_kpi_"]){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){#root .metric-tile{transition:none}#root .metric-tile:hover{transform:none}}

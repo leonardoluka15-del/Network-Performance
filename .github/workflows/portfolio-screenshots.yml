@@ -2,7 +2,7 @@ name: Verify portfolio and refresh screenshots
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, 'design/**']
     paths:
       - 'app.py'
       - 'requirements.txt'
@@ -11,6 +11,8 @@ on:
       - 'performance_insights.py'
       - 'portfolio_components.py'
       - 'assets/**'
+      - 'static/**'
+      - 'dashboard_cards.py'
       - 'pages/**'
       - '.github/scripts/capture_portfolio.py'
       - '.github/workflows/portfolio-screenshots.yml'
@@ -47,7 +49,7 @@ jobs:
           git add docs/screenshots
           if ! git diff --cached --quiet; then
             git commit -m "docs: refresh verified portfolio screenshots"
-            git pull --rebase origin main
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
       - name: Preserve diagnostics

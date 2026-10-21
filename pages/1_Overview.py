@@ -1,3 +1,4 @@
+from dashboard_cards import render_metric_cards
 from portfolio_components import render_briefing
 from sentinel_theme import style_chart, palette
 import streamlit as st
@@ -399,7 +400,7 @@ st.markdown(
         'Network command centre'
         '</div>'
         '<div class="overview-subtitle">'
-        'Network-wide performance, traffic, technology health and operational exceptions'
+        'Performance, traffic and service health across your network.'
         '</div>'
         '</div>'
     ),
@@ -496,236 +497,7 @@ hosr = latest_summary.get(
 st.write("")
 
 
-k1, k2, k3 = st.columns(3, gap="small")
-k4, k5, k6 = st.columns(3, gap="small")
-
-
-with k1:
-
-    kpi_card(
-        "Network Availability",
-        format_percent(
-            network_availability
-        ),
-        "Cross-technology average",
-        "overview_kpi_availability"
-    )
-
-
-with k2:
-
-    kpi_card(
-        "Data Traffic",
-        format_data(
-            total_data_mb
-        ),
-        "Latest reporting day",
-        "overview_kpi_data"
-    )
-
-
-with k3:
-
-    kpi_card(
-        "Voice Traffic",
-        format_voice(
-            total_voice
-        ),
-        "2G + 3G + VoLTE",
-        "overview_kpi_voice"
-    )
-
-
-with k4:
-
-    kpi_card(
-        "Accessibility",
-        format_percent(
-            accessibility
-        ),
-        "Network accessibility",
-        "overview_kpi_accessibility"
-    )
-
-
-with k5:
-
-    kpi_card(
-        "Drop Rate",
-        format_percent(
-            drop_rate
-        ),
-        "2G + VoLTE average",
-        "overview_kpi_drop"
-    )
-
-
-with k6:
-
-    kpi_card(
-        "Mobility / HOSR",
-        format_percent(
-            hosr
-        ),
-        "Cross-technology mobility",
-        "overview_kpi_hosr"
-    )
-
-
-# ============================================================
-# TECHNOLOGY HEALTH
-# ============================================================
-
-render_briefing(trend_df)
-
-st.write("")
-
-
-with st.container(
-    border=True,
-    key="overview_panel_technology_health"
-):
-
-    panel_title(
-        "Technology Health",
-        (
-            "Latest performance snapshot across "
-            "2G, 3G, 4G, 5G and VoLTE"
-        )
-    )
-
-
-    if technology_health.empty:
-
-        st.info(
-            "No technology health information is available."
-        )
-
-
-    else:
-
-        health_df = (
-            technology_health.copy()
-        )
-
-
-        # ====================================================
-        # STATUS
-        # ====================================================
-
-        health_df[
-            "Status"
-        ] = health_df.apply(
-            lambda row:
-                technology_status(
-                    row[
-                        "Availability"
-                    ],
-                    row[
-                        "Accessibility"
-                    ]
-                ),
-            axis=1
-        )
-
-
-        # ====================================================
-        # FORMAT TABLE
-        # ====================================================
-
-        display_health = (
-            health_df.copy()
-        )
-
-
-        for column in [
-            "Availability",
-            "Accessibility",
-            "Retainability",
-            "Mobility"
-        ]:
-
-            display_health[
-                column
-            ] = display_health[
-                column
-            ].apply(
-                lambda value:
-                    (
-                        f"{value:.2f}%"
-                        if pd.notna(
-                            value
-                        )
-                        else "—"
-                    )
-            )
-
-
-        display_health[
-            "Traffic"
-        ] = display_health[
-            "Traffic"
-        ].apply(
-            lambda value:
-                (
-                    f"{value:,.1f}"
-                    if pd.notna(
-                        value
-                    )
-                    else "—"
-                )
-        )
-
-
-        st.dataframe(
-
-            display_health,
-
-            use_container_width=True,
-
-            hide_index=True,
-
-            height=235,
-
-            column_config={
-
-                "Technology":
-                    st.column_config.TextColumn(
-                        "Technology",
-                        width="small"
-                    ),
-
-                "Availability":
-                    st.column_config.TextColumn(
-                        "Availability"
-                    ),
-
-                "Accessibility":
-                    st.column_config.TextColumn(
-                        "Accessibility"
-                    ),
-
-                "Retainability":
-                    st.column_config.TextColumn(
-                        "Retainability"
-                    ),
-
-                "Mobility":
-                    st.column_config.TextColumn(
-                        "Mobility"
-                    ),
-
-                "Traffic":
-                    st.column_config.TextColumn(
-                        "Traffic"
-                    ),
-
-                "Status":
-                    st.column_config.TextColumn(
-                        "Status"
-                    )
-            }
-        )
+render_metric_cards(trend_df, latest_summary)
 
 
 # ============================================================
@@ -938,7 +710,7 @@ with performance_col:
     ):
 
         panel_title(
-            "Network Performance Trend",
+            "Service performance",
             selected_period
         )
 
@@ -1035,7 +807,7 @@ with traffic_col:
     ):
 
         panel_title(
-            "Data Traffic Trend",
+            "Data traffic",
             "2G + 3G + 4G + 5G"
         )
 
@@ -1562,6 +1334,164 @@ with vendor_col:
             }
         )
 
+
+# ============================================================
+# TECHNOLOGY HEALTH
+# ============================================================
+
+
+st.write("")
+
+
+with st.container(
+    border=True,
+    key="overview_panel_technology_health"
+):
+
+    panel_title(
+        "Technology Health",
+        (
+            "Latest performance snapshot across "
+            "2G, 3G, 4G, 5G and VoLTE"
+        )
+    )
+
+
+    if technology_health.empty:
+
+        st.info(
+            "No technology health information is available."
+        )
+
+
+    else:
+
+        health_df = (
+            technology_health.copy()
+        )
+
+
+        # ====================================================
+        # STATUS
+        # ====================================================
+
+        health_df[
+            "Status"
+        ] = health_df.apply(
+            lambda row:
+                technology_status(
+                    row[
+                        "Availability"
+                    ],
+                    row[
+                        "Accessibility"
+                    ]
+                ),
+            axis=1
+        )
+
+
+        # ====================================================
+        # FORMAT TABLE
+        # ====================================================
+
+        display_health = (
+            health_df.copy()
+        )
+
+
+        for column in [
+            "Availability",
+            "Accessibility",
+            "Retainability",
+            "Mobility"
+        ]:
+
+            display_health[
+                column
+            ] = display_health[
+                column
+            ].apply(
+                lambda value:
+                    (
+                        f"{value:.2f}%"
+                        if pd.notna(
+                            value
+                        )
+                        else "—"
+                    )
+            )
+
+
+        display_health[
+            "Traffic"
+        ] = display_health[
+            "Traffic"
+        ].apply(
+            lambda value:
+                (
+                    f"{value:,.1f}"
+                    if pd.notna(
+                        value
+                    )
+                    else "—"
+                )
+        )
+
+
+        st.dataframe(
+
+            display_health,
+
+            use_container_width=True,
+
+            hide_index=True,
+
+            height=235,
+
+            column_config={
+
+                "Technology":
+                    st.column_config.TextColumn(
+                        "Technology",
+                        width="small"
+                    ),
+
+                "Availability":
+                    st.column_config.TextColumn(
+                        "Availability"
+                    ),
+
+                "Accessibility":
+                    st.column_config.TextColumn(
+                        "Accessibility"
+                    ),
+
+                "Retainability":
+                    st.column_config.TextColumn(
+                        "Retainability"
+                    ),
+
+                "Mobility":
+                    st.column_config.TextColumn(
+                        "Mobility"
+                    ),
+
+                "Traffic":
+                    st.column_config.TextColumn(
+                        "Traffic"
+                    ),
+
+                "Status":
+                    st.column_config.TextColumn(
+                        "Status"
+                    )
+            }
+        )
+
+
+
+render_briefing(trend_df)
 
 # ============================================================
 # WORST PERFORMING SITES

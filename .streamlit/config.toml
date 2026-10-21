@@ -1,10 +1,31 @@
 [client]
 showSidebarNavigation = false
 
+[server]
+enableStaticServing = true
+
 [theme]
 base = "dark"
-primaryColor = "#64e9b1"
-backgroundColor = "#090d14"
-secondaryBackgroundColor = "#101720"
-textColor = "#e7edf6"
-font = "sans serif"
+primaryColor = "#70e1c4"
+backgroundColor = "#0b1220"
+secondaryBackgroundColor = "#111c2d"
+textColor = "#eff4fc"
+font = "Inter"
+headingFont = "Inter"
+baseFontSize = 15
+baseFontWeight = 400
+headingFontWeights = [650, 650, 600, 600, 600, 600]
+headingFontSizes = ["2rem", "1.5rem", "1.15rem", "1rem", "1rem", "0.9rem"]
+metricValueFontSize = "1.85rem"
+metricValueFontWeight = 600
+baseRadius = "0.75rem"
+buttonRadius = "0.5rem"
+borderColor = "#26344a"
+dataframeBorderColor = "#26344a"
+dataframeHeaderBackgroundColor = "#172337"
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/fonts/inter-latin.woff2"
+weight = "100 900"
+style = "normal"
