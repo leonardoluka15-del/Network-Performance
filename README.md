@@ -111,7 +111,19 @@ Network-Performance/
 
 ## Dashboard screenshots
 
-Dashboard screenshots have not yet been added to this repository. Run the application locally to explore the current interface.
+Screenshots captured from the running application using sample data.
+
+### Network overview
+
+![Network overview dashboard](docs/screenshots/overview.png)
+
+### 4G technology dashboard
+
+![4G network performance dashboard](docs/screenshots/technology-4g.png)
+
+### Site analytics
+
+![Site analytics dashboard](docs/screenshots/site-analytics.png)
 
 ## Custom dashboard services
 
