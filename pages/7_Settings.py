@@ -11,7 +11,7 @@ st.set_page_config(
     page_title="Settings - Network Operations",
     page_icon="⚙️",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 
@@ -20,7 +20,7 @@ st.set_page_config(
 # ============================================================
 
 if "dashboard_theme" not in st.session_state:
-    st.session_state["dashboard_theme"] = "Light"
+    st.session_state["dashboard_theme"] = "Dark"
 
 if "auto_refresh_interval" not in st.session_state:
     st.session_state["auto_refresh_interval"] = "Off"
@@ -264,7 +264,7 @@ with st.container(
 
     current_theme = st.session_state.get(
         "dashboard_theme",
-        "Light"
+        "Dark"
     )
 
 

@@ -1,6 +1,6 @@
 # Network Performance Dashboard
 
-**An interactive network operations dashboard built with Python, Streamlit, and Plotly.**
+**A Sentinel-inspired network operations dashboard built with Python, Streamlit, and Plotly.**
 
 Developed by **Leonard Oluka**, this portfolio project demonstrates how network KPI data can be organized into visual dashboards for performance monitoring, site analysis, and reporting.
 
@@ -23,6 +23,22 @@ The project demonstrates practical skills in Python development, data analysis, 
 - **Additional pages:** Alarm and settings interfaces.
 
 Available metrics and behavior depend on the selected page, technology, and data. This is a portfolio demonstration; production deployment and live data integration require project-specific configuration and validation.
+
+## Sentinel interface
+
+The dashboard now uses the visual language of [Sentinel](https://github.com/leonardoluka15-del/Sentinel): a charcoal workspace, mint accents, a persistent left navigation sidebar, compact metric cards, subtle panel borders, and matching Plotly charts. Dark is the default; Settings retains the Light appearance and existing refresh controls.
+
+This is still the original Streamlit application, with its existing KPI database, uploads, site analysis, reports, and technology views. It does not start the standalone Sentinel simulator or replace uploaded KPI data with Sentinel telemetry. Continue to launch it with `streamlit run app.py`; existing Streamlit hosting can keep the same entry point.
+
+The navigation shell lives in `navigation.py`; shared presentation tokens and charts live in `sentinel_theme.py`; the responsive CSS lives in `assets/sentinel.css`. Demo/sample-data labeling is retained.
+
+### Interface verification
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The regression suite renders all eleven pages in an isolated copy and checks sidebar routing, technology routing, theme switching, and chart rendering. It leaves the repository's KPI database unchanged. This verifies application execution and controls, not pixel-level browser appearance.
 
 ## Technology stack
 

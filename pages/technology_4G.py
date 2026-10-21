@@ -8,7 +8,7 @@ st.set_page_config(
     page_title="4G - Network Operations",
     page_icon="📡",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 

@@ -1,3 +1,4 @@
+from sentinel_theme import style_chart, palette
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -317,55 +318,8 @@ def technology_kpi(
         )
 
 
-def clean_chart(
-    figure,
-    height=230,
-    legend=False
-):
-
-    figure.update_layout(
-        height=height,
-
-        margin=dict(
-            l=5,
-            r=5,
-            t=10,
-            b=5
-        ),
-
-        paper_bgcolor="#ffffff",
-        plot_bgcolor="#ffffff",
-
-        font=dict(
-            family="Arial",
-            size=11,
-            color="#666666"
-        ),
-
-        showlegend=legend,
-
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="left",
-            x=0
-        )
-    )
-
-    figure.update_xaxes(
-        showgrid=False,
-        zeroline=False,
-        linecolor="#ededed"
-    )
-
-    figure.update_yaxes(
-        showgrid=True,
-        gridcolor="#f1f1f1",
-        zeroline=False
-    )
-
-    return figure
+def clean_chart(figure, height=230, legend=False):
+    return style_chart(figure, height=height, legend=legend)
 
 
 # ============================================================

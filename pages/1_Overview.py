@@ -1,3 +1,4 @@
+from sentinel_theme import style_chart, palette
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -24,7 +25,7 @@ st.set_page_config(
     page_title="Overview - Network Operations",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # NAVIGATION
@@ -33,36 +34,22 @@ navigation("Overview")
 # THEME
 dashboard_theme = st.session_state.get(
     "dashboard_theme",
-    "Light"
+    "Dark"
 )
 
-if dashboard_theme == "Dark":
-    PAGE_BG = "#111827"
-    PANEL_BG = "#1f2937"
-    CARD_BG = "#1f2937"
-    TEXT_PRIMARY = "#f9fafb"
-    TEXT_SECONDARY = "#cbd5e1"
-    TEXT_MUTED = "#94a3b8"
-    BORDER = "#64748b"
-    CHART_BG = "#1f2937"
-    GRID = "#374151"
-
-else:
-    PAGE_BG = "#ffffff"
-    PANEL_BG = "#ffffff"
-    CARD_BG = "#ffffff"
-    TEXT_PRIMARY = "#111111"
-    TEXT_SECONDARY = "#666666"
-    TEXT_MUTED = "#8a8a8a"
-    BORDER = "#8f969f"
-    CHART_BG = "#ffffff"
-    GRID = "#eeeeee"
-
-CORAL = "#ff6258"
-GREEN = "#16a34a"
-AMBER = "#d97706"
-RED = "#dc2626"
-BLUE = "#2563eb"
+_colors = palette()
+PAGE_BG = _colors['page']
+PANEL_BG = CARD_BG = CHART_BG = _colors['panel']
+TEXT_PRIMARY = _colors['text']
+TEXT_SECONDARY = _colors['secondary']
+TEXT_MUTED = _colors['muted']
+BORDER = _colors['border']
+GRID = _colors['grid']
+CORAL = _colors['accent']
+GREEN = _colors['accent']
+AMBER = '#eebe6a'
+RED = '#ff7285'
+BLUE = '#6d9fff'
 
 # PAGE CSS
 st.markdown(
@@ -368,20 +355,7 @@ def technology_status(availability, accessibility):
 
 # PLOTLY BASE STYLE
 def clean_chart(figure, height=260, legend=False):
-    figure.update_layout(
-        height=height,
-        margin=dict(l=10, r=10, t=10, b=10),
-        paper_bgcolor=CHART_BG,
-        plot_bgcolor=CHART_BG,
-        font=dict(family="Arial", size=11, color=TEXT_SECONDARY),
-        hoverlabel=dict(bgcolor=CHART_BG, font_color=TEXT_PRIMARY),
-        showlegend=legend,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0)
-    )
-
-    figure.update_xaxes(showgrid=False, zeroline=False, linecolor=GRID, tickfont=dict(color=TEXT_SECONDARY))
-    figure.update_yaxes(showgrid=True, gridcolor=GRID, zeroline=False, tickfont=dict(color=TEXT_SECONDARY))
-    return figure
+    return style_chart(figure, height=height, legend=legend)
 
 # DATABASE CHECK
 if not database_has_data():
@@ -389,7 +363,7 @@ if not database_has_data():
         (
             '<div class="overview-wrapper">'
             '<div class="overview-title">'
-            'Network Operations Overview'
+            'Network command centre'
             '</div>'
             '<div class="overview-subtitle">'
             'Network-wide performance monitoring'
@@ -421,7 +395,7 @@ st.markdown(
     (
         '<div class="overview-wrapper">'
         '<div class="overview-title">'
-        'Network Operations Overview'
+        'Network command centre'
         '</div>'
         '<div class="overview-subtitle">'
         'Network-wide performance, traffic, technology health and operational exceptions'
@@ -1481,7 +1455,7 @@ with traffic_share_col:
 
             showlegend=False
         )
-
+        figure = style_chart(figure, height=280, legend=False)
 
         st.plotly_chart(
             figure,
