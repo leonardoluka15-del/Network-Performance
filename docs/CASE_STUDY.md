@@ -53,7 +53,7 @@ The queue flags latest-day site averages below 99% availability, below 98% acces
 
 The suite includes 13 tests and renders all 12 functional dashboard pages. It checks changes in site coverage, missing counters, zero baselines, duplicate records, invalid values, reporting gaps, thresholds, sidebar routing, chart rendering and theme controls. Interface tests run in a temporary copy so they do not modify the repository database.
 
-Direct dependencies are pinned to the locally tested versions; supported CI runtimes are Python 3.11 and 3.12. Python 3.10 selects an older Streamlit release with different navigation-test behavior and is outside this verified runtime.
+Direct dependencies are pinned to the locally tested versions; CI covers Python 3.11, 3.12 and the hosted Python 3.14 runtime. Pandas 2.3.3 includes Python 3.14 Linux wheels, avoiding the source-build path of the earlier 2.2.3 pin. Python 3.10 selects an older Streamlit release with different navigation-test behavior and is outside this verified runtime.
 
 A separate GitHub Actions job exercises the real browser and captures desktop/mobile images. Its outcome must be checked in Actions; a configured workflow alone does not establish a passed browser test.
 

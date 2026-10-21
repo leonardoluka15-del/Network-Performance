@@ -1,6 +1,6 @@
-# Verified runtime: Python 3.11 / 3.12. Pin direct dependencies for reproducible demos.
+# Python 3.11+; direct dependencies include binary wheels for the cloud Python 3.14 runtime.
 streamlit==1.66.1
-pandas==2.2.3
+pandas==2.3.3
 numpy==2.3.5
 plotly==7.1.0
 openpyxl==3.1.5

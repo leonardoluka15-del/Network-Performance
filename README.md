@@ -72,7 +72,7 @@ The regression suite renders all twelve pages in an isolated copy and checks ana
 
 ## Run locally
 
-Use **Python 3.11 or 3.12** and Git, then run the following commands. Direct runtime dependencies are pinned in `requirements.txt` for repeatable demonstrations; Python 3.10 is not supported by the pinned Streamlit release.
+Use **Python 3.11, 3.12, or 3.14** and Git, then run the following commands. Direct runtime dependencies are pinned in `requirements.txt` for repeatable demonstrations; Python 3.10 is not supported by the pinned Streamlit release.
 
 ### 1. Clone the repository
 
